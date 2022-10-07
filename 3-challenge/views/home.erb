@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title>Directory</title>
+</head>
+
+<body>
+
+<h1>Directory </h1>
+ <% @dir.each do |file| %>
+  <ul>
+    <li> <a href=<%= file %> ><%= file %></a> </li>
+  </ul>
+  <% end %>
+</body>
+
+<p>
+  <% if params[:sort] == "desc" %>
+  <a href="/">Sort ascending</a>
+  <% else %>
+  <a href="/?sort=desc">Sort descending</a>
+  <% end %>
+</p>
+
+</html>
