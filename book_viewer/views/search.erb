@@ -20,7 +20,7 @@
           <% current_chap = File.read("./data/chp#{chapter}.txt") %>
           <% results = relevant_paragraphs(current_chap, @text_query).select { |pgph| pgph } %>
           <% results.each do |pgph| %>
-            <p><a href="/chapters/<%= chapter %>#<%= pgph[:number] %>">&#x2022 <%= bold_match(pgph[:par], @text_query) if pgph %></a></p>
+            <p><a href="/chapters/<%= chapter %>#<%= pgph[:number] %>">&#x2022 <%= bold_match(pgph[:par], @text_query) %></a></p>
           <% end %>
         </li>
       <% end %>
