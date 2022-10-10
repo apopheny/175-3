@@ -14,6 +14,10 @@ helpers do
       {:par => pgph, :number => idx +1} if pgph.include?(query)
     end
   end
+
+  def bold_match(text, query)
+    text.gsub(query, "<strong>#{query}</strong>")
+  end
 end
 
 
