@@ -10,14 +10,21 @@
   
   <ul class="pure-menu-list">
     <% if @search_results.empty? %>
-    <%= "<p>Sorry, no results found</p>" %>
+     <%= "<p>Sorry, no results found</p>" %>
     <% else %>
       <% @search_results.each do |chapter| %>
         <li class="pure-menu-item">
           <a href="/chapters/<%= chapter %>" class="pure-menu-link">Chapter <%= chapter %>: <%= @contents[chapter - 1] %></a>
         </li>
+        <li class="pure-menu-item">
+          <% current_chap = File.read("./data/chp#{chapter}.txt") %>
+          <% results = relevant_paragraphs(current_chap, @text_query).select { |pgph| pgph } %>
+          <% results.each do |pgph| %>
+            <p><a href="/chapters/<%= chapter %>#<%= pgph[:number] %>"><%= pgph[:par] if pgph %></a></p>
+          <% end %>
+        </li>
       <% end %>
     <% end %>
   </ul>
-  
+
 <% end %>

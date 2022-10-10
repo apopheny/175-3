@@ -2,16 +2,23 @@ require 'tilt/erubis'
 require "sinatra"
 require "sinatra/reloader"
 
-before do
-  @contents = File.readlines './data/toc.txt'
-end
-
 helpers do
   def in_paragraphs(text)
-    text.split("\n\n").map do |pgph|
-      "<p>#{pgph}</p>"
+    text.split("\n\n").map.with_index do |pgph, idx|
+      "<p id=#{idx + 1}>#{pgph}</p>"
     end.join
   end
+
+  def relevant_paragraphs(text, query)
+    hits = text.split("\n\n").map.with_index do |pgph, idx|
+      {:par => pgph, :number => idx +1} if pgph.include?(query)
+    end
+  end
+end
+
+
+before do
+  @contents = File.readlines './data/toc.txt'
 end
 
 not_found do
