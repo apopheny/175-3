@@ -1,5 +1,7 @@
 <ul>
   <% @working_file.each do |name, data| %>
-    <li><%= name %></li>
+    <li><a href="/<%= name %>" name="name" value="<%= params[:name] %>" %><%= name %></a></li>
   <% end %>
 </ul>
+
+<%= params %>

@@ -1,0 +1,28 @@
+<h2><%= @name.capitalize %></h2>
+<h4>Email:</h4>
+<ul><li><%= @user_data[:email] %></li></ul>
+<h4>Interests:</h4>
+<% @user_data[:interests].each_with_index do |interest, idx| %>
+  <% if idx >= @user_data[:interests].size - 1 %>
+    <%= interest + "." %>
+  <% elsif idx > 0 %>
+    <%= interest + ", " %>
+  <% else %>
+    <%= interest.capitalize + ", " %>
+  <% end %>
+<% end %>
+
+<h2>Other users:</h2>
+<p>
+  <ul>
+    <% @working_file.each do |name, data| %>
+      <% unless name == @name.to_sym %>
+        <li><a href="/<%= name %>" name="name" value="<%= params[:name] %>" %><%= name %></a></li>
+      <% end %>
+    <% end %>
+  </ul>
+</p>
+
+<h4>
+There are <%= @working_file.size %> users with a total of <%= count_interests %> interests.
+</h4>
